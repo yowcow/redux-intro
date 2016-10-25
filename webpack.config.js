@@ -13,6 +13,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         loader: 'style!css'
       },
       {
@@ -23,11 +24,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify('production')
-        }
-    }),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    //new webpack.DefinePlugin({
+    //    'process.env': {
+    //        NODE_ENV: JSON.stringify('production')
+    //    }
+    //}),
+    //new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
 }

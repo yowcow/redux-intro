@@ -13,19 +13,51 @@ const Counter = ({
     </div>
 )
 
-const store = require('./src/counter.es6')
+const CountManager = ({
+    value,
+    onReset
+}) => (
+    <div>
+      <div>Counted count is: {value}</div>
+      <button onClick={onReset}>Reset</button>
+    </div>
+)
+
+const counterStore = require('./src/counter.es6')
+const countManagerStore = require('./src/count-manager.es6')
 
 const render = () => {
     ReactDOM.render(
-        <Counter
-            value={store.getState()}
-            onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-            onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-        />,
+        (
+            <div>
+              <Counter
+                value={counterStore.getState()}
+                onIncrement={
+                    () => {
+                        counterStore.dispatch({ type: 'INCREMENT' })
+                        countManagerStore.dispatch({ type: 'FIRED' })
+                    }
+                }
+                onDecrement={
+                    () => {
+                        counterStore.dispatch({ type: 'DECREMENT' })
+                        countManagerStore.dispatch({ type: 'FIRED' })
+                    }
+                }
+              />
+              <CountManager
+                value={countManagerStore.getState()}
+                onReset={
+                    () => countManagerStore.dispatch({ type: 'RESET' })
+                }
+              />
+            </div>
+        ),
         document.getElementById('main')
     )
 }
 
-store.subscribe(render)
+counterStore.subscribe(render)
+countManagerStore.subscribe(render)
 
 render()

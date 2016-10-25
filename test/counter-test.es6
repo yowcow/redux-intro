@@ -1,4 +1,4 @@
-const expect = require('expect')
+import expect from 'expect'
 
 const store = require('../src/counter.es6')
 
