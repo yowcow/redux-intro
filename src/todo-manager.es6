@@ -1,4 +1,4 @@
-const module = {
+const _mod = {
   toggleTodo(item) {
     return Object.assign(
       {},
@@ -8,4 +8,4 @@ const module = {
   }
 }
 
-export default module
+export default _mod
