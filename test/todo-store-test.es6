@@ -1,4 +1,5 @@
 import expect from 'expect'
+import deepFreeze from 'deep-freeze'
 import todoStore from '../src/todo-store.es6'
 
 describe('todoStore', () => {
@@ -17,6 +18,8 @@ describe('todoStore', () => {
         completed: false
       }
     ]
+
+    deepFreeze(action)
 
     expect(todoStore.getState()).toEqual(stateBefore)
 
@@ -49,6 +52,8 @@ describe('todoStore', () => {
       }
     ]
 
+    deepFreeze(action)
+
     expect(todoStore.getState()).toEqual(stateBefore)
 
     todoStore.dispatch({
@@ -72,6 +77,8 @@ describe('todoStore', () => {
       id: 0
     }
     const stateAfter = []
+
+    deepFreeze(action)
 
     expect(todoStore.getState()).toEqual(stateBefore)
 
